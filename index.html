@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>YPT Dashboard</title>
+    <link rel="stylesheet" href="main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+
+  
+
+
+<body>
+    <div class="container">
+        <nav class="navbar">📘 YPT Web</nav>
+
+        <section class="timer-box">
+            <h1 id="main-timer">00:00:00</h1>
+        </section>
+
+
+        <section class="subject-list">
+            <!-- Subject Cards -->
+            <div class="subject-card">
+                <button id="math-btn" onclick="toggleSubjectTimer('math')">▶</button>
+                <div>
+                    <h2>Math</h2>
+                    <p id="math-timer">00:00:00</p>
+                </div>
+            </div>
+
+            <div class="subject-card">
+                <button id="english-btn" onclick="toggleSubjectTimer('english')">▶</button>
+                <div>
+                    <h2>English</h2>
+                    <p id="english-timer">00:00:00</p>
+                </div>
+            </div>
+
+            <div class="subject-card">
+                <button id="science-btn" onclick="toggleSubjectTimer('science')">▶</button>
+                <div>
+                    <h2>Science</h2>
+                    <p id="science-timer">00:00:00</p>
+                </div>
+            </div>
+
+        </section>
+    </div>
+    <div id="confirmModal" class="modal-overlay" style="display: none;">
+        <div class="modal-box">
+          <p>Do you want to switch to this subject?</p>
+          <div class="modal-buttons">
+            <button id="confirmYes">Yes</button>
+            <button id="confirmNo">Cancel</button>
+          </div>
+        </div>
+      </div>
+      
+      <div class="add-subject">
+        <button onclick="showAddSubjectPrompt()">➕ Add Subject</button>
+      </div>
+      
+</body>
+<script>
+    let hasStartedOnce = false;
+    let pendingSubject = null;
+    let activeSubject = null;
+  
+    const subjects = {
+      math:    { s: 0, m: 0, h: 0, interval: null },
+      english: { s: 0, m: 0, h: 0, interval: null },
+      science: { s: 0, m: 0, h: 0, interval: null }
+    };
+  
+    function format(val) {
+      return val < 10 ? "0" + val : val;
+    }
+  
+    function updateSubjectTimer(subject) {
+      const obj = subjects[subject];
+      obj.s++;
+      if (obj.s === 60) {
+        obj.s = 0;
+        obj.m++;
+      }
+      if (obj.m === 60) {
+        obj.m = 0;
+        obj.h++;
+      }
+  
+      document.getElementById(`${subject}-timer`).textContent =
+        `${format(obj.h)}:${format(obj.m)}:${format(obj.s)}`;
+  
+      updateMainTimer();
+    }
+  
+    function updateMainTimer() {
+      let totalS = 0, totalM = 0, totalH = 0;
+  
+      for (let key in subjects) {
+        totalS += subjects[key].s;
+        totalM += subjects[key].m;
+        totalH += subjects[key].h;
+      }
+  
+      totalM += Math.floor(totalS / 60);
+      totalS = totalS % 60;
+      totalH += Math.floor(totalM / 60);
+      totalM = totalM % 60;
+  
+      document.getElementById("main-timer").textContent =
+        `${format(totalH)}:${format(totalM)}:${format(totalS)}`;
+    }
+  
+    function toggleSubjectTimer(subject) {
+      if (subject === activeSubject) {
+        stopSubject(subject);
+        return;
+      }
+  
+      const isAnotherRunning = activeSubject !== null;
+  
+      if (hasStartedOnce && isAnotherRunning) {
+        pendingSubject = subject;
+        document.getElementById("confirmModal").style.display = "flex";
+      } else {
+        startSubject(subject);
+      }
+    }
+  
+    function startSubject(subject) {
+      const btn = document.getElementById(`${subject}-btn`);
+  
+      subjects[subject].interval = setInterval(() => updateSubjectTimer(subject), 1000);
+      btn.textContent = "⏸";
+      btn.classList.add("active");
+  
+      activeSubject = subject;
+      hasStartedOnce = true;
+    }
+  
+    function stopSubject(subject) {
+      const btn = document.getElementById(`${subject}-btn`);
+      clearInterval(subjects[subject].interval);
+      subjects[subject].interval = null;
+      btn.textContent = "▶";
+      btn.classList.remove("active");
+  
+      if (activeSubject === subject) {
+        activeSubject = null;
+      }
+    }
+  
+    // ✅ YES BUTTON (confirm switch)
+    document.getElementById("confirmYes").onclick = () => {
+      document.getElementById("confirmModal").style.display = "none";
+  
+      if (activeSubject) {
+        stopSubject(activeSubject);
+      }
+  
+      if (pendingSubject) {
+        startSubject(pendingSubject);
+        pendingSubject = null;
+      }
+    };
+  
+    // ❌ CANCEL BUTTON (do nothing)
+    document.getElementById("confirmNo").onclick = () => {
+      document.getElementById("confirmModal").style.display = "none";
+      pendingSubject = null;
+    };
+    function showAddSubjectPrompt() {
+    const subjectName = prompt("Enter subject name:");
+    if (!subjectName || subjects[subjectName.toLowerCase()]) {
+      alert("Invalid or duplicate subject!");
+      return;
+    }
+
+    const id = subjectName.toLowerCase().replace(/\s+/g, '-');
+
+    // Add subject to data object
+    subjects[id] = { s: 0, m: 0, h: 0, interval: null };
+
+    // Add to DOM
+    const subjectList = document.querySelector(".subject-list");
+    const card = document.createElement("div");
+    card.className = "subject-card";
+    card.innerHTML = `
+      <button id="${id}-btn" onclick="toggleSubjectTimer('${id}')">▶</button>
+      <div>
+        <h2>${subjectName}</h2>
+        <p id="${id}-timer">00:00:00</p>
+      </div>
+    `;
+    subjectList.appendChild(card);
+  }
+  </script>
+</html>

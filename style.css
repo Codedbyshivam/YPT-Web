@@ -1,0 +1,86 @@
+
+/* this is login page css */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+
+  body, html {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(135deg, #ffc094, #ffd396, #ffddab);
+
+
+  }
+  
+
+  .bg {
+    background: url('https://images.unsplash.com/photo-1547658719-da2b51169166') no-repeat center center/cover;
+    filter: blur(8px);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+  }
+  
+
+  .login-box {
+    max-width: 400px;
+    margin: 100px auto;
+    background: rgb(255, 255, 255);
+    padding: 40px;
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    color: rgb(255, 253, 253);
+  }
+  
+  /* Headings */
+  .login-box h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: black;
+  }
+  
+  .login-box p {
+    font-size: 14px;
+    margin-bottom: 25px;
+    color: #000000;
+  }
+  
+  /* Form Styling */
+  .login-box form input {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 10px;
+    outline: 1px solid black;
+  }
+  
+  .login-box form button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background: #f46c01;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .login-box form button:hover {
+    background: #ff913e;
+  }
+ 
+/* this is home page css */
+
