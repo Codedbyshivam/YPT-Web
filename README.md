@@ -52,3 +52,13 @@
    ```bash
    git clone https://github.com/yourusername/yeolpumta-web.git
    cd yeolpumta-web
+# 🤝 Contributing
+Want to join? Pull requests and collaborators are welcome!
+
+Please open an issue if you want to:
+
+Report bugs
+
+Request features
+
+Join the project as a contributor
