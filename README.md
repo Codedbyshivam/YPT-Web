@@ -1,91 +1,54 @@
-# This Project Is Under Development
+# 📚 YeolPumTa (YPT) - Web Study Tracker
 
-# YPT Web (YeolPumTa Web Timer)
+**YPT** is a web-based productivity app inspired by the YeolPumTa method (열품타). It helps students stay focused, manage their time effectively, and collaborate with study groups.
 
-YPT Web is a browser-based study timer inspired by the YeolPumTa app. It helps students track time spent on different subjects, switch between them seamlessly, and monitor total study time – all in a clean, distraction-free web interface.
+## 🚀 Features
 
-## 🌟 Features
+### 🔥 Timer Tools
+- Focus Timer with play/pause/reset
+- Break Tracker
+- Daily Total Time summary
+- Countdown Timer with animated ring UI and alerts
 
-- 📌 Subject-specific timers
-- 🕒 Live total timer (auto-updates with all subjects)
-- ✅ Play/Pause each subject independently
-- ⚠️ Confirmation modal when switching subjects
-- ➕ Add custom subjects dynamically
-- 🎨 Blurred background and modern UI
-- 🔥 No sign-up or installation needed – just open and study
+### ✅ To-do System
+- Add tasks with priority, due date, and notes
+- Drag-and-drop between Pending and Completed
+- Smart filters (priority, due date, status)
+- Reminder alerts (popup + browser notifications)
+- Collapsible task sections and pinning
 
-## ✅ Available Features
-✅ Main cumulative timer showing total study time across subjects
+### 📌 Subject Tracking
+- Track time per subject
+- Add/edit subjects dynamically
+- Toggle per-subject timers
+- Time auto-saves across sessions
 
-✅ Subject-specific timers with individual start/pause control
+### 👥 Group Collaboration
+- Create or join groups
+- Owner tag & group deletion
+- Group detail view with total time, members, etc.
+- Settings popup for group control
 
-✅ Only one subject active at a time to ensure focus
+### 🌙 Dark Mode
+- One-click toggle between dark and light themes
+- Auto-saves preference
 
-✅ Switch confirmation modal when changing subjects
-
-✅ Styled modal popup with “Yes” and “Cancel” options
-
-✅ Dynamically add custom subjects with + button
-
-✅ Modern UI with gradient themes and blurred background
-
-✅ Responsive design optimized for web use
-
-✅ No refresh required, all timers work in real-time
-
-# 🛠️ Coming Soon
-⏳ Save progress locally (via LocalStorage or database)
-
-⏳ Study history tracking (daily/weekly/monthly summaries)
-
-⏳ Edit or delete custom subjects
-
-⏳ Subject categorization (e.g., school, work, hobby)
-
-⏳ User login & profile system
-
-⏳ Timer alarms or sound notifications
-
-⏳ Dark mode toggle
-
-⏳ Progress sharing or public leaderboard
-
-⏳ Group/Team study feature (track study time as a group)
-
-⏳ Export study reports (PDF, CSV download)
-
-## 🚀 How It Works
-
-1. Click ▶ to start timing a subject.
-2. Switching subjects prompts for confirmation (after the first time).
-3. Add a custom subject using the ➕ button.
-4. The main timer shows cumulative study time across all subjects.
-
-## 🛠 Tech Stack
-
-- **HTML** + **CSS** for structure and styling
-- **JavaScript** for timer logic and interactivity
-- No external frameworks required
-
-## 📁 Folder Structure
-
-
-## ✅ Usage
-
-- Clone or download the repo.
-- Open `index.html` in any modern browser.
-- Start tracking your study time!
-
-## 📌 Note
-
-This project is for educational and productivity purposes only and is not affiliated with the official YeolPumTa app.
-
-## 💡 Future Ideas
-
-- Local storage to save study time
-- Dark mode toggle
-- Weekly progress tracking
+### 💻 Tech Stack
+- **HTML**, **CSS**, **JavaScript**
+- No frameworks – pure frontend!
+- LocalStorage for persistence
 
 ---
 
-Happy studying! 💪📚
+## 🧪 Demo
+
+🧱 _Demo coming soon (or add screenshots/GIFs here)_
+
+---
+
+## 🛠️ Getting Started
+
+1. Clone the repository
+   ```bash
+   git clone https://github.com/yourusername/yeolpumta-web.git
+   cd yeolpumta-web
