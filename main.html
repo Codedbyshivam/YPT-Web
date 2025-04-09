@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YPT - Yeolpumta</title>
+  <link rel="stylesheet" href="main.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+  </style>
+</head>
+
+<body>
+  <div id="welcome-screen" class="welcome-overlay">
+    <div class="welcome-content">
+      <h1>👋 Welcome to YPT</h1>
+      <p>Get ready to stay focused!</p>
+      <div class="loading-dots">
+        <span>.</span><span>.</span><span>.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="top-bar">
+    <div class="d-day">YeolPumTa</div>
+    <div class="digital-clock" id="digitalClock">00:00:00</div>
+  </div>
+  <div class="tab-nav">
+    <button class="tab" onclick="switchTab('subjects')">Subjects</button>
+    <button class="tab" onclick="switchTab('countdown')">Countdown</button>
+    <button class="tab" onclick="switchTab('todo')">To-do</button>
+    <button class="tab active" onclick="switchTab('timer')">Timer</button>
+    <button class="tab" onclick="switchTab('group')">Group</button>
+
+
+  </div>
+
+  <!-- Tab Content -->
+  <div id="tab-content">
+    <div id="timer-tab" class="tab-page active">
+
+
+      <div class="timer-box">
+        <h2>Daily Total Time</h2>
+        <div id="daily-total-time" class="timer-display orange">00:00:00</div>
+      </div>
+
+      <div class="timer-box">
+        <h2>Break Tracker</h2>
+        <div id="break-time" class="timer-display blue">00:00:00</div>
+        <div class="focus-controls">
+          <button onclick="startBreakTimer()">Start</button>
+          <button onclick="pauseBreakTimer()">Pause</button>
+          <button onclick="resetBreakTimer()">Reset</button>
+        </div>
+      </div>
+
+      <div class="timer-box">
+        <h2>Focus Timer</h2>
+        <div id="focus-time" class="timer-display orange">00:00:00</div>
+        <div class="focus-controls">
+          <button onclick="startFocusTimer()">Start</button>
+          <button onclick="pauseFocusTimer()">Pause</button>
+          <button onclick="resetFocusTimer()">Reset</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="todo-tab" class="tab-page">
+    <div class="todo-header">
+      <h2 class="section-title">📝 To-do List</h2>
+      <button id="filterBtn" class="filter-btn">🔍 Filter</button>
+    </div>
+    <div id="filterModal" class="modal-overlay" style="display: none;">
+      <div class="modal-box filter-modal">
+        <h3>Filter Tasks</h3>
+        <label>Priority:</label>
+        <select id="filterPriority">
+          <option value="all">All</option>
+          <option value="high">High 🔴</option>
+          <option value="medium">Medium 🟡</option>
+          <option value="low">Low 🔵</option>
+        </select>
+
+        <label>Status:</label>
+        <select id="filterStatus">
+          <option value="all">All</option>
+          <option value="pending">Pending</option>
+          <option value="completed">Completed</option>
+        </select>
+
+        <label>Due Date Before:</label>
+        <input type="date" id="filterDueDate" />
+
+        <div class="modal-buttons">
+          <button id="applyFilter">Apply</button>
+          <button id="cancelFilter">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Add Task Form -->
+    <div class="todo-input-box">
+      <input type="text" id="taskInput" placeholder="Enter your task..." />
+      <select id="prioritySelect">
+        <option value="low">Low 🔵</option>
+        <option value="medium" selected>Medium 🟡</option>
+        <option value="high">High 🔴</option>
+      </select>
+      <input type="datetime-local" id="dueDateInput" />
+      <button id="addTaskBtn">Add</button>
+    </div>
+
+
+
+    <!-- Edit Task Modal -->
+    <div id="editTaskModal" class="modal-overlay" style="display: none;">
+      <div class="modal-box">
+        <p>Edit your task:</p>
+        <input type="text" id="editTaskInput" />
+        <div class="modal-buttons">
+          <button id="saveEditBtn">Save</button>
+          <button onclick="closeEditModal()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <div class="task-section">
+      <h3>Pending Tasks</h3>
+      <ul id="pendingTasks" class="task-list"></ul>
+    </div>
+
+    <hr class="task-divider" />
+
+    <div class="task-section">
+      <h3>Completed Tasks</h3>
+      <ul id="completedTasks" class="task-list completed"></ul>
+    </div>
+  </div>
+
+
+  <div id="subjects-tab" class="tab-page">
+    <div class="subject-scroll-container">
+      <div id="subject-list">
+        <!-- Subject cards will be inserted dynamically -->
+      </div>
+      <button id="add-subject-btn">＋ Add Subject</button>
+    </div>
+  </div>
+
+
+  <!-- Existing Subject Cards go here -->
+  </div>
+  </div>
+  <div id="confirmModal" class="modal-overlay" style="display: none;">
+    <div class="modal-box">
+      <p>Do you want to switch to this subject?</p>
+      <div class="modal-buttons">
+        <button id="confirmYes">Yes</button>
+        <button id="confirmNo">Cancel</button>
+      </div>
+    </div>
+  </div>
+  <button class="dark-toggle" id="themeToggle">
+    🌙 Dark Mode
+  </button>
+  <!-- Add Subject Modal -->
+  <div id="addSubjectModal" class="modal-overlay" style="display: none;">
+    <div class="modal-box add-subject-modal">
+      <p>Enter new subject name:</p>
+      <input type="text" id="newSubjectInput" placeholder="e.g., History" />
+      <div class="modal-buttons">
+        <button id="addSubjectConfirm">Add</button>
+        <button id="addSubjectCancel">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="countdown-tab" class="tab-page">
+    <div class="countdown-box">
+      <input type="number" id="countdown-input" placeholder="Enter minutes" />
+
+      <div class="countdown-buttons">
+        <button id="countdown-start">Start</button>
+        <button id="countdown-pause">Pause</button>
+        <button id="countdown-reset">Reset</button>
+      </div>
+      <div class="progress-ring-container">
+        <svg class="progress-ring" width="120" height="120">
+          <circle class="progress-ring-bg" cx="60" cy="60" r="50" />
+          <circle class="progress-ring-circle" cx="60" cy="60" r="50" />
+        </svg>
+        <div class="countdown-text" id="countdown-display">00:00</div>
+      </div>
+
+
+    </div>
+  </div>
+
+  <div id="group-tab" class="tab-page">
+    <div class="group-tab-container">
+      <h2 class="group-heading">👥 My Study Group</h2>
+      <p class="group-subtext">Collaborate and track progress with your friends or classmates.</p>
+
+      <div class="group-actions">
+        <button onclick="openGroupModal('create')">➕ Create Group</button>
+        <button onclick="openGroupModal('join')">🔗 Join Group</button>
+      </div>
+
+      <div id="myGroupsSection" class="group-section">
+        <h3>My Groups</h3>
+        <div id="myGroupsList" class="group-list"></div>
+      </div>
+
+      <div class="group-placeholder">
+        <p>🚀 Group features like timers, leaderboards, and shared tasks are coming soon!</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="groupModal" class="modal-overlay" style="display: none;">
+    <div class="modal-box">
+      <h3 id="groupModalTitle">Create Group</h3>
+      <input type="text" id="groupInput" placeholder="Enter group name or code">
+      <div class="modal-buttons">
+        <button id="groupConfirmBtn">Confirm</button>
+        <button onclick="closeGroupModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <svg width="0" height="0">
+    <defs>
+      <linearGradient id="gradient" x1="1" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#FF6B6B" />
+        <stop offset="50%" stop-color="#FFD93D" />
+        <stop offset="100%" stop-color="#6BCB77" />
+      </linearGradient>
+    </defs>
+  </svg>
+  <audio id="alarmSound" src="alarm.wav" preload="auto"></audio>
+  <div id="toast" class="toast-message">This is a toast</div>
+
+
+  <script src="main.js"></script>
+</body>
+
+
+</html>

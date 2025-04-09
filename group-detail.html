@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Group Detail</title>
+    <link rel="stylesheet" href="group-detail.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+    </style>
+</head>
+
+<body>
+    <div class="group-detail-container">
+        <h1 id="groupName"></h1>
+
+
+        <div class="stat-grid">
+            <div class="stat-box">
+                <div>Total Group Time</div>
+                <div id="groupTime">00:00:00</div>
+            </div>
+            <div class="stat-box">
+                <div>Your Total Time</div>
+                <div id="userTime">00:00:00</div>
+            </div>
+            <div class="stat-box">
+                <div>Total Members</div>
+                <div id="totalMembers">--</div>
+            </div>
+            <div class="stat-box">
+                <div>Online Members</div>
+                <div id="onlineMembers">--</div>
+            </div>
+        </div>
+
+        <button class="back-btn" onclick="window.location.href='main.html'">🔙 Back to Dashboard</button>
+
+    </div>
+    <!-- Settings Button -->
+    <button onclick="openSettings()" class="settings-btn">⚙️ Group Settings</button>
+
+
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <h2>Group Settings</h2>
+            <p>Manage group features and preferences.</p>
+
+            <button id="deleteGroupBtn" class="delete-btn">🗑️ Delete Group</button>
+            <button class="close-btn" onclick="closeSettings()">❌ Close</button>
+        </div>
+    </div>
+
+    <div id="deleteConfirmModal" class="modal">
+        <div class="modal-content">
+          <h3>Delete Group?</h3>
+          <p>Are you sure you want to delete this group? This action cannot be undone.</p>
+          <div class="modal-actions">
+            <button class="cancel-btn" onclick="closeDeleteModal()">Cancel</button>
+            <button class="confirm-btn" onclick="confirmGroupDelete()">Yes, Delete</button>
+          </div>
+        </div>
+      </div>
+      
+
+
+    <script src="main.js" defer></script>
+    <script src="group-detail.js" defer></script>
+
+</body>
+
+</html>
