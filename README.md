@@ -42,7 +42,7 @@
 
 ## 🧪 Demo
 
-🧱 _Demo coming soon (or add screenshots/GIFs here)_
+🧱 _Demo coming soon_
 
 ---
 
